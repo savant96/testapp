@@ -50,6 +50,11 @@ desc "Symlink shared config files"
     run "#{ sudo } ln -s #{ deploy_to }/shared/config/database.yml #{ current_path }/config/database.yml"
   end
 
+desc "Reload apache"
+task :restart do
+    run "service apache2 load"
+end
+
 
  # NOTE: I don't use this anymore, but this is how I used to do it.
   desc "Precompile assets after deploy"
@@ -68,11 +73,6 @@ desc "Symlink shared config files"
       #{ sudo } bundle exec rake db:migrate RAILS_ENV=production
     CMD
   end
-
-desc "Reload apache"
-task :restart do
-    run "service apache2 load"
-end
 
 
 
